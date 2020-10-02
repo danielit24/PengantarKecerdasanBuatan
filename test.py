@@ -59,17 +59,14 @@ def bfs(starting_city, destination_city):
         print(node.name)
         for edge in node.edges:
             if edge.node == end_node:
+                print(node.name)
                 end = False
                 break
             else:
                 queue.put(edge.node)
 
-
-
-
-
 def main():
-    dfs("Arad","Oradea")
+    bfs("Arad","Oradea")
 
 if __name__ == "__main__":
     main()
