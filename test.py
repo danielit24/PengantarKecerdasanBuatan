@@ -160,7 +160,8 @@ class Graph :
             "Oradea": node_oradea,
             "Neamt": node_neamt,
             "Fagaras": node_fagaras,
-            "Eforie": node_eforie
+            "Eforie": node_eforie,
+            "Rimnicu Vilcea": node_rimnicu_vilcea
         }
 
 def bfs(starting_city, destination_city):
@@ -189,22 +190,25 @@ def bfs(starting_city, destination_city):
 
 def dfs(current_node, graph, end_node, limit, path = [], last_node = []):
     if current_node.depth > limit:
-        raise ValueError
+        return
 
     if current_node != end_node:
         if current_node not in path:
             path.append(current_node)
             for edge in current_node.edges:
                 if(not last_node):
-                    edge.node.depth = current_node.depth + 1
                     if(edge.node not in path):
+                        edge.node.depth = current_node.depth + 1
                         dfs(edge.node, graph, end_node, limit, path, last_node)
+                    else:
+                        edge.node.depth = current_node.depth - 1
                 else:
                     return path
                 
     else:
         path.append(current_node)
         last_node.append(current_node)
+        print(path)
         
 
 def init_dfs(starting_city, destination_city, limit):
@@ -220,9 +224,9 @@ def init_dfs(starting_city, destination_city, limit):
         print("DFS Stopped")
     
 def main():
-    bfs("Arad","Eforie")
+    bfs("Arad","Fagaras")
     #init_dfs("Arad","Eforie", 20)
-    init_dfs("Arad","Oradea", 1)
+    init_dfs("Arad","Rimnicu Vilcea", 2)
 
 
 if __name__ == "__main__":
